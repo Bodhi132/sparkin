@@ -1,16 +1,19 @@
+// stepperSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface FormData {
-  [key: string]: unknown; // Replace any with unknown or more specific types
-}
-
-interface StepFormData {
-  [key: number]: FormData;
+// Define this in a shared types file or at least make sure it matches the component's FormValues
+interface FormValues {
+  startStopResources?: boolean;
+  startStop?: Record<string, boolean>;
+  pauseResumeResources?: boolean;
+  pauseResume?: Record<string, boolean>;
+  resourceCleanup?: boolean;
+  resourceCleanupOptions?: Record<string, boolean>;
 }
 
 interface StepperState {
   currentStep: number;
-  formData: StepFormData;
+  formData: { [key: number]: FormValues }; // Use FormValues here
 }
 
 const initialState: StepperState = {
@@ -28,10 +31,7 @@ const stepperSlice = createSlice({
     prevStep: (state) => {
       if (state.currentStep > 1) state.currentStep -= 1;
     },
-    updateFormData: (
-      state, 
-      action: PayloadAction<{ step: number; data: FormData }>
-    ) => {
+    updateFormData: (state, action: PayloadAction<{ step: number; data: FormValues }>) => {
       const { step, data } = action.payload;
       state.formData[step] = { ...state.formData[step], ...data };
     },
