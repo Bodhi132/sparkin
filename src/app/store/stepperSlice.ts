@@ -1,8 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+interface FormData {
+  [key: string]: unknown; // Replace any with unknown or more specific types
+}
+
+interface StepFormData {
+  [key: number]: FormData;
+}
+
 interface StepperState {
   currentStep: number;
-  formData: { [key: number]: { [key: string]: any } };
+  formData: StepFormData;
 }
 
 const initialState: StepperState = {
@@ -20,7 +28,10 @@ const stepperSlice = createSlice({
     prevStep: (state) => {
       if (state.currentStep > 1) state.currentStep -= 1;
     },
-    updateFormData: (state, action: PayloadAction<{ step: number; data: any }>) => {
+    updateFormData: (
+      state, 
+      action: PayloadAction<{ step: number; data: FormData }>
+    ) => {
       const { step, data } = action.payload;
       state.formData[step] = { ...state.formData[step], ...data };
     },

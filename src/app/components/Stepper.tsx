@@ -18,7 +18,7 @@ const Stepper = () => {
   const [formValues, setFormValues] = useState<{ [key: string]: boolean }>({});
 
   useEffect(() => {
-    setFormValues(formData[currentStep] || {});
+    setFormValues((formData[currentStep] as { [key: string]: boolean }) || {});
   }, [currentStep, formData]);
 
   const handleNext = () => {
