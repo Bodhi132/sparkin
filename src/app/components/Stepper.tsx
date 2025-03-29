@@ -15,7 +15,6 @@ interface FormValues {
   pauseResume?: Record<string, boolean>;
   resourceCleanup?: boolean;
   resourceCleanupOptions?: Record<string, boolean>;
-  [key: string]: unknown;
 }
 
 const steps = ["Start", "Select Actions", "Link AWS A/c", "Fetch"];
