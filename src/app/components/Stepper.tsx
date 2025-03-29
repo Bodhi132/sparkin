@@ -15,15 +15,11 @@ const Stepper = () => {
   const currentStep = useSelector((state: RootState) => state.stepper.currentStep);
   const formData = useSelector((state: RootState) => state.stepper.formData);
 
-  const [formValues, setFormValues] = useState<{ [key: string]: any }>({});
+  const [formValues, setFormValues] = useState<{ [key: string]: boolean }>({});
 
   useEffect(() => {
     setFormValues(formData[currentStep] || {});
   }, [currentStep, formData]);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value });
-  };
 
   const handleNext = () => {
     dispatch(updateFormData({ step: currentStep, data: formValues }));

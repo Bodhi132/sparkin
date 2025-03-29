@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import { FaRegCopy } from "react-icons/fa6";
 
 const JamPolicy = () => {
